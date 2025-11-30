@@ -41,7 +41,8 @@ int main(){
 
 
             printf("%d, %d\n", x,y);
-            Brasenham_line(getmaxx()/2, getmaxy()/2, x, y);
+            // Brasenham_line(getmaxx()/2, getmaxy()/2, x, y);
+            DDAline(getmaxx()/2, getmaxy()/2 ,x,y);
             // putpixel(x,y,BLUE);
             // putpixel(x+1,y,BLUE);
             // putpixel(x-1,y,BLUE);
@@ -71,30 +72,30 @@ void PlotPoint(int x,int y,int color){
 
 void DDAline(int x1,int y1,int x2,int y2){
 
-    x1 = getmaxx()/2 + x1;
-    y1 = getmaxy()/2 - y1;
+    // x1 = getmaxx()/2 + x1;
+    // y1 = getmaxy()/2 - y1;
 
-    x2 = getmaxx()/2 + x2;
-    y2 = getmaxy()/2 - y2;
+    // x2 = getmaxx()/2 + x2;
+    // y2 = getmaxy()/2 - y2;
 
-    printf("(x = %d, y = %d) \n(x = %d, y = %d)\n\n", x1, y1, x2, y2);
+    // printf("(x = %d, y = %d) \n(x = %d, y = %d)\n\n", x1, y1, x2, y2);
 
     int dx = x2-x1, dy = y2-y1;
     int step = (abs(dx) > abs(dy)) ? abs(dx) : abs(dy);
 
-    printf("step = %d\n", step);
+    // printf("step = %d\n", step);
     
-    float xinc = (step != 0) ? (float)dx / step : 0;
-    float yinc = (step != 0) ? (float)dy / step : 1;
+    float xinc = (step != 0) ? (float)dx / (float)step : 0.0;
+    float yinc = (step != 0) ? (float)dy / (float)step : 1.0;
     
-    printf("xinc = %f, yinc = %f", xinc, yinc);
+    // printf("xinc = %f, yinc = %f", xinc, yinc);
     
     for(int i = 0; i < step; i++){
-        // if (i % 10 < 5) { // Creates a dashed effect
-            putpixel(round(x1), round(y1), RED);
-        // }
         x1 += xinc;
         y1 += yinc;
+        // if (i % 10 < 5) { // Creates a dashed effect
+            putpixel(x1, y1, RED);
+        // }
     }
     
 }

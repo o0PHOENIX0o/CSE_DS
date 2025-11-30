@@ -22,7 +22,7 @@ void naiveSearch(char *text, char *pattern){
 
 
 int Hash(int hi, int x, int y){
-    return (hi - x + y + prime) % prime;
+    return (hi - x + y) % prime;
 }
 
 // 2. Rabin-Karp Method
@@ -98,14 +98,14 @@ void finiteAutomatonSearch(char *text, char *pattern){
 }
 
 int main(){
-    char text[] = "ABABDABACDABABCABAB";
+    char text[] = "BAABABABCABABCABAB";
     char pattern[] = "ABABCABAB";
 
-    naiveSearch(text, pattern);
-    printf("\n");
+    // naiveSearch(text, pattern);
+    // printf("\n");
     rabinKarpSearch(text, pattern);
     printf("\n");
-    finiteAutomatonSearch(text, pattern);
+    // finiteAutomatonSearch(text, pattern);
 
     return 0;
 }

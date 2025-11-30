@@ -34,9 +34,9 @@ void printCodes(Node* root, char* code, int depth) {
     code[depth] = '1'; printCodes(root->right, code, depth + 1);
 }
 int main() {
-    char chars[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
-    int freq[] = { 12, 9, 5, 13, 16, 45 };
-    int n = 6, size = 0;
+    char chars[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+    int freq[] = { 10, 10, 20, 30, 5, 8, 5, 12 };
+    int n = 8, size = 0;
     Node* heap[100], *left, *right, *top;
     for (int i = 0; i < n; i++)
         insert(heap, &size, newNode(chars[i], freq[i]));

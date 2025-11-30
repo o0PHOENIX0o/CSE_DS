@@ -22,7 +22,7 @@ int main(){
 
     //20 matrices
     // int Matrices[21] = {12, 20, 35, 55, 65, 70, 68, 75, 40, 38, 42, 50, 18, 24, 30, 28, 48, 56, 60, 80, 82};
-    int Matrices[] = {20,30,10,100,50};
+    int Matrices[] = {30,35,15,5,10,20,25};
     int n = sizeof(Matrices) / sizeof(Matrices[0]);
 
     int **dp = (int **)calloc(n, sizeof(int *));

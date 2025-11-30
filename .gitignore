@@ -5,3 +5,6 @@
 *.py
 *.html
 *.md
+
+**/test*
+**/tempCodeRunnerFile*

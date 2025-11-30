@@ -30,22 +30,22 @@ void printGraph(Graph* graph) {
     printf("\n");
 }
 
-int t = 0;
-void DFS(Graph *graph, int startingVertex, int Stime[], int Ftime[], int stack[]){
+
+void DFS(Graph *graph, int startingVertex, int Stime[], int Ftime[], int stack[], int *t, int *top){
     int v = startingVertex;
     graph->visited[v] = 1;
-    Stime[v] = ++t;
+    Stime[v] = ++(*t);
     for(int i = 0; i < graph->V; i++){
         if(graph->adjMatrix[v][i] && !graph->visited[i]){
-            DFS(graph, i, Stime, Ftime, stack);
+            DFS(graph, i, Stime, Ftime, stack, t, top);
         }
     }
 
-    Ftime[v] = ++t;
-    stack[t] = v;
+    Ftime[v] = ++(*t);
+    stack[(*top)++] = v;
 }
 
-void topologicalSort(Graph* graph) {
+void topologicalSort(Graph* graph, int *t, int *top) {
     int Stime[graph->V];
     int Ftime[graph->V];
     int stack[MAX];
@@ -58,27 +58,34 @@ void topologicalSort(Graph* graph) {
 
     for(int i = 0; i < graph->V; i++) {
         if(!graph->visited[i]) {
-            DFS(graph, i, Stime, Ftime, stack);
+            DFS(graph, i, Stime, Ftime, stack, t, top);
         }
     }
 
     printf("Topological Sort: ");
-    for(int i = graph->V-1; i >= 0; i--) {
-        printf("%c ", 65 + stack[i]);
+    for(int i = (*top)-1; i >=0; i--) {
+        printf("%d ", stack[i]);
+        // printf("%c ", 65 + stack[i]);
     }
     printf("\n");
 }
 
 int main() {
-    Graph* graph = initGraph(4);
+    Graph* graph = initGraph(6);
+    int t = 0;
+    int top = 0;
     addEdge(graph, 0, 1);
     addEdge(graph, 0, 2);
-    addEdge(graph, 1, 2);
+    addEdge(graph, 1, 4);
     addEdge(graph, 1, 3);
     addEdge(graph, 2, 3);
+    addEdge(graph, 2, 5);
+    addEdge(graph, 3, 4);
+    addEdge(graph, 3, 5);
+
     printf("Input Graph:\n");
     printGraph(graph);
-    topologicalSort(graph);
+    topologicalSort(graph, &t, &top);
 
     return 0;
 }

@@ -55,16 +55,12 @@ Node *CreateNode(int val){
 }
 
 int getHeight(Node *n){
-    if(n == NULL){
-        return 0;
-    }
+    if(n == NULL) return 0;
     return n->height;
 }
 
 int getBalanceFactor(Node *n){
-    if(n == NULL){
-        return 0;
-    }
+    if(n == NULL) return 0;
     return getHeight(n->lchild) - getHeight(n->rchild);
 }
 
@@ -76,9 +72,7 @@ Node* leftRotation(Node *A){
     A->height = 1 + max(getHeight(A->lchild), getHeight(A->rchild));
     B->height = 1 + max(getHeight(B->lchild), getHeight(B->rchild));
 
-
-    return B;
-   
+    return B;   
 }
 
 Node* rightRotation(Node *A){
@@ -99,19 +93,13 @@ void insert(Node **node, int val){
         return;
     }
 
-    if(val < (*node)->data){
-        insert(&(*node)->lchild, val);
-    }else if(val > (*node)->data){
-        insert(&(*node)->rchild, val);
-    }else{
-        return;
-    }
+    if(val < (*node)->data) insert(&(*node)->lchild, val);
+    else if(val > (*node)->data) insert(&(*node)->rchild, val);
+    else return;
 
     (*node)->height = 1 + max(getHeight((*node)->lchild), getHeight((*node)->rchild));
 
-
     int BF = getBalanceFactor(*node);
-
     if(BF > 1 && val < (*node)->lchild->data){
         // LL rotation
         *node = rightRotation(*node);
@@ -131,17 +119,11 @@ void insert(Node **node, int val){
 
 
 int Search(Node *node, int val){
-    if(node == NULL){
-        return 0;
-    }
+    if(node == NULL) return 0;
 
-    if(node->data == val){
-        return 1;
-    }else if(node->data > val){
-        return Search(node->lchild, val);
-    }else{
-        return Search(node->rchild, val);
-    }
+    if(node->data == val) return 1;
+    else if(node->data > val) return Search(node->lchild, val);
+    else return Search(node->rchild, val);
 }
 
 

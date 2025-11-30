@@ -46,67 +46,70 @@ int main(){
 
 
 
-    printf("Counting Sort: \n");
-    printf("Input size \t   time taken\n");
-    printf("-----------------------------------\n");
-    for(int i=0; i<n; i++){
-        int size = Sizes[i];
-        int *Arr = GenArr(size);
+    // printf("Counting Sort: \n");
+    // printf("Input size \t   time taken\n");
+    // printf("-----------------------------------\n");
+    // for(int i=0; i<n; i++){
+    //     int size = Sizes[i];
+    //     int *Arr = GenArr(size);
 
-        QueryPerformanceCounter(&start);
-        CountSort(Arr, size);
-        QueryPerformanceCounter(&end);
+    //     QueryPerformanceCounter(&start);
+    //     CountSort(Arr, size);
+    //     QueryPerformanceCounter(&end);
 
-        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
-        printf("%-18d  %-5.2lf ns\n", size, time_taken);
+    //     double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
+    //     printf("%-18d  %-5.2lf ns\n", size, time_taken);
 
-        free(Arr);
-    }
-
-    printf("------------------------------------------------------------------------------\n");
-    printf("Radix Sort: \n");
-    printf("Input size \t   time taken\n");
-    printf("-----------------------------------\n");
-
-    for(int i=0; i<n; i++){
-        int size = Sizes[i];
-        int *Arr = GenArr(size);
+    //     free(Arr);
+    // }
+    int Arr[] = {1,8,7,2,4,1};
+    CountSort(Arr, 6);
 
 
-        QueryPerformanceCounter(&start);
-        RadixSort(Arr,size);
-        QueryPerformanceCounter(&end);
+    // printf("------------------------------------------------------------------------------\n");
+    // printf("Radix Sort: \n");
+    // printf("Input size \t   time taken\n");
+    // printf("-----------------------------------\n");
 
-        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
-        printf("%-18d  %-5.2lf ns\n", size, time_taken);
+    // for(int i=0; i<n; i++){
+    //     int size = Sizes[i];
+    //     int *Arr = GenArr(size);
 
-        free(Arr);
-    }
+
+    //     QueryPerformanceCounter(&start);
+    //     RadixSort(Arr,size);
+    //     QueryPerformanceCounter(&end);
+
+    //     double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
+    //     printf("%-18d  %-5.2lf ns\n", size, time_taken);
+
+    //     free(Arr);
+    // }
     
     
-    printf("------------------------------------------------------------------------------\n");
-    printf("Bucket Sort: \n");
-    printf("Input size \t   time taken\n");
-    printf("-----------------------------------\n");
+    // printf("------------------------------------------------------------------------------\n");
+    // printf("Bucket Sort: \n");
+    // printf("Input size \t   time taken\n");
+    // printf("-----------------------------------\n");
 
-    for(int i=0; i<n; i++){
-        int size = Sizes[i];
-        float min = 1.0f, max = 999.0f;
-        float* Arr = (float*)malloc(sizeof(float) * size);
-        for (int i = 0; i < size; i++){
-            Arr[i] = min + (float)rand() * (max - min);
-        }
+    // for(int i=0; i<n; i++){
+    //     int size = Sizes[i];
+    //     float min = 1.0f, max = 999.0f;
+    //     float* Arr = (float*)malloc(sizeof(float) * size);
+    //     for (int i = 0; i < size; i++){
+    //         Arr[i] = min + (float)rand() * (max - min);
+    //     }
 
 
-        QueryPerformanceCounter(&start);
-        BucketSort(Arr, size);
-        QueryPerformanceCounter(&end);
+    //     QueryPerformanceCounter(&start);
+    //     BucketSort(Arr, size);
+    //     QueryPerformanceCounter(&end);
 
-        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
-        printf("%-18d  %-5.2lf ns\n", size, time_taken);
+    //     double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
+    //     printf("%-18d  %-5.2lf ns\n", size, time_taken);
 
-        free(Arr);
-    }
+    //     free(Arr);
+    // }
 }
 
 
@@ -127,10 +130,14 @@ void CountSort(int *Arr, int size){
     for(int i=0; i < size; i++){
         count[Arr[i]]++;
     }
+
+    printArray(count, max+1);
+    
     
     for(int i=1; i <= max; i++){
         count[i] += count[i-1];
     }
+    printArray(count, max+1);
 
     int *output = (int*)calloc(size, sizeof(int));
     if(output == NULL){
@@ -226,7 +233,7 @@ void InsertInBucket(Bucket** head, float val){
 
     node->next = cur->next;
     cur->next = node;
-
+ 
 }
 
 

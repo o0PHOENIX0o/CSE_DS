@@ -39,13 +39,12 @@ void floydWarshall(int **adjMatrix, int V) {
 }
 
 int main() {
-    int V = 5;
-    int inputGraph[5][5] = {
-        {0,   2,   10,  11,  INF},
-        {INF, 0,   3,   INF, INF},
-        {6,   INF, 0,   INF, 5},
-        {INF, INF, 2,   0,   18},
-        {7,   INF, INF, INF, 0},
+    int V = 4;
+    int inputGraph[4][4] = {
+        {0,   3,   8,  INF},
+        {INF, 0,   4,  11},
+        {INF, INF, 0,  7},
+        {4, INF, INF,   0, }
     };
 
     int **adjMatrix = (int **)malloc(V * sizeof(int *));

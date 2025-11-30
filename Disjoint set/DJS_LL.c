@@ -53,9 +53,7 @@ Node* makeSet(int val){
     return node;
 }
 
-Node* find(Node *node){
-    return node->Head;
-}
+Node* find(Node *node){ return node->Head; }
 
 void Union(Node *x, Node *y){
     Node *xHead = find(x);

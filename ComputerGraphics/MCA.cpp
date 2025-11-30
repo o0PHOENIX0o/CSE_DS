@@ -17,7 +17,7 @@ int main(){
     int xc = getmaxx() / 2, yc = getmaxy() / 2;
     // int xc = 200, yc = 250;
 
-    int r = 100;
+    int r = 14;
     drawCircle(xc, yc, r);
     // drawCircle(xc, yc + r, r);
     // drawCircle(xc, yc - r, r);
@@ -52,14 +52,15 @@ void putPixels(int xc, int yc, int x, int y){
 
 void drawCircle(int xc, int yc, int r){
     int x= 0, y = r;
-    int p = r + 0.75;
+    int p = 1.25-r;
 
     while(x <= y){
+        printf("%d, %d, %d\n", x, y, p);
         putPixels(xc, yc, x, y);
-        if(p <= 0) p += 2*x+3;
+        if(p < 0) p += 2*x+3;
         else{
-            y--;
             p += 2*(x-y) + 5;
+            y--;
         }
         x++;
     }

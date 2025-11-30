@@ -259,36 +259,47 @@ void quickSort(int *arr, int left, int right);
 void mergeSort(int arr[], int i, int j);
 void merge(int arr[], int i, int mid, int j);
 int main(){
-    LARGE_INTEGER freq, start, end;
-    QueryPerformanceFrequency(&freq);
-    srand(time(0));
-    int Sizes[] = {100, 1000, 10000, 100000, 1000000};
-    int n = sizeof(Sizes)/sizeof(Sizes[0]);
-    printf("quick sort: \n Input size \t   time taken\n");
-    printf("-----------------------------------\n");
-    for(int i=0; i<n; i++){
-        int size = Sizes[i];
-        int *Arr = GenArr(size);
-        QueryPerformanceCounter(&start);
-        quickSort(Arr, 0, size - 1);
-        QueryPerformanceCounter(&end);
-        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
-        printf("%-18d  %-5.2lf ns\n", size, time_taken);
-        free(Arr);
+    // LARGE_INTEGER freq, start, end;
+    // QueryPerformanceFrequency(&freq);
+    // srand(time(0));
+    // int Sizes[] = {100, 1000, 10000, 100000, 1000000};
+    // int n = sizeof(Sizes)/sizeof(Sizes[0]);
+    // printf("quick sort: \n Input size \t   time taken\n");
+    // printf("-----------------------------------\n");
+    // for(int i=0; i<n; i++){
+    //     int size = Sizes[i];
+    //     int *Arr = GenArr(size);
+    //     QueryPerformanceCounter(&start);
+    //     quickSort(Arr, 0, size - 1);
+    //     QueryPerformanceCounter(&end);
+    //     double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
+    //     printf("%-18d  %-5.2lf ns\n", size, time_taken);
+    //     free(Arr);
+    // }
+    // printf("------------------------------------------------------------------------------\n");
+    // printf("merge sort: \n Input size \t   time taken\n");
+    // printf("-----------------------------------\n");
+    // for(int i=0; i<n; i++){
+    //     int size = Sizes[i];
+    //     int *Arr = GenArr(size);
+    //     QueryPerformanceCounter(&start);
+    //     mergeSort(Arr, 0, size-1);
+    //     QueryPerformanceCounter(&end);
+    //     double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
+    //     printf("%-18d  %-5.2lf ns\n", size, time_taken);
+    //     free(Arr);
+    // }
+    int Arr[] = {12, 3, 5, 7, 4, 19, 26};
+    for(int i =0;i<7;i++){
+        printf("%d ", Arr[i]);
     }
-    printf("------------------------------------------------------------------------------\n");
-    printf("merge sort: \n Input size \t   time taken\n");
-    printf("-----------------------------------\n");
-    for(int i=0; i<n; i++){
-        int size = Sizes[i];
-        int *Arr = GenArr(size);
-        QueryPerformanceCounter(&start);
-        mergeSort(Arr, 0, size-1);
-        QueryPerformanceCounter(&end);
-        double time_taken = (double)(end.QuadPart - start.QuadPart) * 1e9 / freq.QuadPart;
-        printf("%-18d  %-5.2lf ns\n", size, time_taken);
-        free(Arr);
+    printf("\n");
+    mergeSort(Arr, 0, 6);
+
+    for(int i =0;i<7;i++){
+        printf("%d ", Arr[i]);
     }
+
 }
 /*************************************************************************/
 /*                              Quick Sort                               */
@@ -320,27 +331,15 @@ void merge(int arr[], int i, int mid, int j){
     int mergedArray[j-i+1];
     int Index=0, x = i, y = mid+1;
     while(x <= mid && y <= j){
-        if(arr[x] <= arr[y]){
-            mergedArray[Index] = arr[x];
-            x++;
-        } else{
-            mergedArray[Index] = arr[y];
-            y++; 
-        }
-        Index++;
+        if(arr[x] <= arr[y])
+            mergedArray[Index++] = arr[x++];
+        else
+            mergedArray[Index++] = arr[y++];
     }
-    while(x<=mid){
-        mergedArray[Index] = arr[x];
-        Index++;
-        x++;
-    }
-    while(y<=j){
-        mergedArray[Index] = arr[y];
-        Index++;
-        y++; 
-    }
-    for (int k = 0; k < Index; k++)
-        arr[i + k] = mergedArray[k];
+    while(x<=mid){ mergedArray[Index++] = arr[x++];}
+    while(y<=j){ mergedArray[Index++] = arr[y++];}
+
+    for (int k = 0; k < Index; k++) arr[i + k] = mergedArray[k];
 }
 void mergeSort(int arr[], int i, int j){
     if(i>=j) return;
